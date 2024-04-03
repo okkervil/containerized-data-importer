@@ -277,6 +277,8 @@ const (
 	// SourceVDDK is the source type of VDDK
 	SourceVDDK = "vddk"
 
+	SourceKopia = "kopia"
+
 	// ClaimLost reason const
 	ClaimLost = "ClaimLost"
 	// NotFound reason const

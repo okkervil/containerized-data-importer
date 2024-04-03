@@ -15,6 +15,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	neturl "net/url"
 	"os"
 	"strconv"
 	"strings"
@@ -257,6 +258,20 @@ func newDataSource(source string, contentType string, volumeMode v1.PersistentVo
 
 	switch source {
 	case cc.SourceHTTP:
+		klog.Infof("======http====: %s", ep)
+		url, err := neturl.ParseRequestURI(ep)
+		if err != nil {
+			klog.Errorf("Invalid source URL: %s", ep)
+			errorCannotConnectDataSource(err, "http")
+		}
+		if url.Scheme == cc.SourceKopia {
+			ds, err := importer.NewKopiaDataSource(ep, acc, sec)
+			if err != nil {
+				errorCannotConnectDataSource(err, "kopia")
+			}
+			return ds
+		}
+
 		ds, err := importer.NewHTTPDataSource(getHTTPEp(ep), acc, sec, certDir, cdiv1.DataVolumeContentType(contentType))
 		if err != nil {
 			errorCannotConnectDataSource(err, "http")

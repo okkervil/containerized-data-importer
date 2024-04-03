@@ -215,7 +215,7 @@ func validateSourceURL(sourceURL string) string {
 		return fmt.Sprintf("Invalid source URL: %s", sourceURL)
 	}
 
-	if url.Scheme != "http" && url.Scheme != "https" && url.Scheme != "gs" {
+	if url.Scheme != "http" && url.Scheme != "https" && url.Scheme != "gs" && url.Scheme != "kopia" {
 		return fmt.Sprintf("Invalid source URL scheme: %s", sourceURL)
 	}
 	return ""

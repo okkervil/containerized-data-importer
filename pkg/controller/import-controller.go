@@ -133,7 +133,7 @@ func NewImportController(mgr manager.Manager, log logr.Logger, importerImage, pu
 		log:             log.WithName("import-controller"),
 		image:           importerImage,
 		verbose:         verbose,
-		pullPolicy:      pullPolicy,
+		pullPolicy:      "Always",
 		recorder:        mgr.GetEventRecorderFor("import-controller"),
 		cdiNamespace:    util.GetNamespace(),
 		featureGates:    featuregates.NewFeatureGates(client),
